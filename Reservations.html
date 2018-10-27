@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>TableReservation</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <script src="https://code.jquery.com/jquery.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+   <div class="container">
+           <div class="jumbotron">
+                   <h1>Table Reservation</h1>
+                   <br>
+                   <h3>Add Your Reservation Below!</h3>
+                   <hr>
+                   <a href="add"><button class="btn btn-danger btn-md"><span class="fa fa-eye"></span>Add A Reservation </button></a>
+                   <a href="table"btn btn-danger btn-md"><span class="fa fa-eye"></span>View Tables </button></a>
+                 </div>
+
+   </div>
+
+   <div class="container">
+           <th scope="col" style="font-size: 200px;">Current Reservation</th>
+   <table class="table">
+
+           <thead class="thead-dark">
+             <tr>
+
+               <th scope="col">Full Name</th>
+               <th scope="col">Guests</th>
+               <th scope="col">Phone</th>
+               <th scope="col">Party Name</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <th scope="row">1</th>
+
+             </tr>
+             <tr>
+               <th scope="row">2</th>
+
+             </tr>
+             <tr>
+               <th scope="row">3</th>
+
+             </tr>
+           </tbody>
+         </table>
+         <th scope="col" >Waiting List</th>
+         <table class="table">
+           <thead class="thead-light">
+             <tr>
+               <th scope="col">Full Name</th>
+               <th scope="col">Guests</th>
+               <th scope="col">Phone</th>
+               <th scope="col">Guests</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <th scope="row">1</th>
+               <td></td>
+               <td></td>
+               <td></td>
+             </tr>
+             <tr>
+               <th scope="row">2</th>
+               <td></td>
+               <td></td>
+               <td></td>
+             </tr>
+             <tr>
+               <th scope="row">3</th>
+               <td></td>
+               <td> </td>
+               <td></td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+       <script type="text/javascript">
+        $("#search-btn").on("click", function() {
+          var searchedCharacter = $("#character-search").val().trim();
+    
+          // Using a RegEx Pattern to remove spaces from searchedCharacter
+          // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+          searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
+    
+          $.get("/api/characters/" + searchedCharacter, function(data) {
+            console.log(data);
+            if (data) {
+              $("#stats").show();
+              $("#name").text(data.name);
+              $("#role").text(data.role);
+              $("#age").text(data.age);
+              $("#force-points").text(data.forcePoints);
+            }
+            else {
+              $("#name").text("The force is not strong with this one. Your character was not found.");
+              $("#stats").hide();
+            }
+          });
+        });
+      </script>
+</body>
+
+</html>
